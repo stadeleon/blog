@@ -1,0 +1,43 @@
+<section id="content">
+    <section id="posts">
+        <article>
+            <?php if (($this->new) == 1){
+                echo 'New Post Successfully Added';
+            }?>
+            <header>
+                <h2><?php echo $this->post['po_title'] ?></h2>
+            </header>
+            <a href="/index/edit-post/id/<?php echo $this->post['po_id'] ?>">Edit</a>
+
+            <?php echo $this->removeCutTag($this->post['po_blog_post']) ?>
+            <p class="date"><?php echo $this->post['po_created_at'] ?></p>
+        </article>
+    </section> <!-- posts -->
+    <section id="comments">
+        <header>
+            <h3>Комменты:</h3>
+        </header>
+        <?php if (empty($this->comments)) : ?>
+            <article>
+                <p>Комментов нет</p>
+            </article>
+        <?php else : foreach ($this->comments as $comment) : ?>
+            <article>
+                <?php if (!empty($comment['com_url'])) : ?>
+                    <header>
+                        <h5><a href="<?php echo $comment['com_url'] ?>">
+                                     <?php echo $this->escape($comment['com_name']) ?>
+                            </a>
+                        </h5>
+                    </header>
+                <?php else : ?>
+                    <header>
+                        <h5><?php echo $this->escape($comment['com_name']) ?></h5>
+                    </header>
+                <?php endif ?>
+                <p><?php echo $comment['com_blog_comment'] ?></p>
+                <p class="date"><?php echo $comment['com_created_at'] ?></p>
+            </article>
+        <?php endforeach; endif ?>
+    </section> <!-- comments -->
+</section> <!-- content -->

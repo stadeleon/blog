@@ -1,0 +1,104 @@
+/**
+ * CSS-file
+ *
+ * @author    Kanat Gailimov, http://gailimov.info
+ * @copyright Kanat Gailimov, 2010
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0
+}
+
+body {
+    padding: 2% 0 0;
+    font: 14px/22px Verdana, Tahoma, Helvetica;
+    color: #333;
+    background: #fff
+}
+
+title {
+    font: 18px/22px Verdana, Tahoma, Helvetica;
+}
+
+#wrapper {
+    width: 1000px;
+    margin: 0 auto;
+    border: 1px solid #ccc
+}
+
+header, nav, section, article, aside, footer {display: block}
+
+a {
+    color: #696969;
+    text-decoration: underline
+}
+
+a:hover {
+    color: #696969;
+    text-decoration: none
+}
+
+p {margin: 5px 0}
+
+.date {
+    font-size: 12px;
+    font-style: italic
+}
+
+#header {
+    width: 1000px;
+    height: 75px;
+    text-align: center;
+    background: #fff
+}
+
+#header h1 {padding: 15px 0}
+
+#content {
+    width: 700px;
+    float: left;
+    background: #fff
+}
+
+#content #posts article {margin: 20px}
+
+#content #posts article header {margin-bottom: 15px}
+
+#content #comments {
+    padding: 5px 0;
+    background: #fff
+}
+
+#content #comments header h3 {margin-left: 20px}
+
+#content #comments article {margin: 20px}
+
+#content #comments article header {margin-bottom: 10px}
+
+#content #comment_form {
+    padding: 5px 20px;
+    background: #fff
+}
+
+#content #comment_form form input, select, input, textarea, #content #comment_form form textarea {border: 1px solid #ccc}
+
+aside {
+    width: 300px;
+    float: right;
+    background: #fff
+}
+
+aside section {margin: 20px}
+
+aside section header {margin-bottom: 15px}
+
+aside section li {margin: 5px 0}
+
+footer {
+    clear: both;
+    padding: 5px;
+    text-align: center;
+    background: #fff
+}

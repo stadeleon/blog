@@ -1,0 +1,20 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Mrakobes
+ * Date: 11.09.13
+ * Time: 2:50
+ */
+
+if (!($this->post)){
+    echo 'Error1';
+} else {
+    echo 'OK' . $this->post;
+    # Redirect to home page
+    $frontController = Zend_Controller_Front::getInstance();
+    $response = new Zend_Controller_Response_Http();
+    $response->setRedirect("/index/edit-post/id/{$this->post}/success/1");
+    $frontController->setResponse($response);
+}
+?>
+<a href="/index/">home</a>

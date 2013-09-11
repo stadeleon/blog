@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/css/style.css" media="screen" />
+    <?php echo $this->headTitle() ?>
+</head>
+<body>
+<div id="wrapper">
+    <header id="header">
+        <h1><a href="<?php echo $this->baseUrl() ?>">
+                     <?php echo $this->title ?>
+            </a>
+        </h1>
+    </header>
+    <?php echo $this->layout()->content; ?>
+<aside>
+    <section>
+        <header>
+            <h4>Категории</h4>
+        </header>
+        </ul>
+    </section>
+</aside>
+        <li><a href="/index/index/">Home</a></li>
+        <li><a href="/index/new-post/">New Post</a></li>
+        <?php foreach ($this->categories as $category) : ?>
+            <li><a href="<?php
+                    echo $this->url(array('controller' => 'index',
+                                          'action' => 'category',
+                                          'id' => $category->cat_id))
+                    ?>"><?php echo $category->cat_title ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div> <!-- wrapper -->
+</body>
+</html>

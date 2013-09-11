@@ -1,0 +1,47 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Mrakobes
+ * Date: 11.09.13
+ * Time: 2:25
+ */
+?>
+<section id="content">
+    <section id="posts">
+        <article>
+            <header>
+                <h2><?php echo 'Post Editing' ?></h2>
+            </header>
+            <?php if (($this->success) == 1){
+                echo 'Post Changes Successfully Saved';
+            }?>
+            <form action="/index/update-post" method="post">
+                <label for="cat_id">Select Category</label>
+                <select name="cat_id">
+                    <?php foreach ($this->categoryList as $category) : ?>
+                        <option value="<?php echo $category['cat_id'] ?>"
+                                       <?=($category['cat_id'] == $this->post['po_category_id']) ? 'selected' : '' ?> >
+                            <?php echo $category['cat_title'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <br/>
+                <label for="title">Posts Title</label>
+                <input type="text" name="title" style ="width:100%;x" value="<?php echo $this->post['po_title'] ?>">
+
+                <label for="url">Enter posts URL here</label>
+                <input type="text" name="url" style ="width:100%;" value="<?php echo $this->post['po_url'] ?>">
+
+                <label for="blog_post">Your Content Below</label><br/>
+                <textarea name="blog_post" style ="width:100%; min-height:250px"><?php echo $this->post['po_blog_post'] ?></textarea>
+
+                <label for="date">Select Date</label>
+                <input type="datetime" class="date" name="date" value="<?php echo $this->post['po_created_at'] ?>" >
+
+                <input type="hidden" name="id" value="<?php echo $this->post['po_id'] ?>">
+                <br/>
+                <input type="submit" name="submit" value="Save">
+            </form>
+        </article>
+    </section> <!-- posts -->
+</section> <!-- content -->

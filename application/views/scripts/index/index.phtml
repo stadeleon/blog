@@ -1,0 +1,24 @@
+<section id="content">
+    <section id="posts">
+<?php if (count($this->posts) < 1) : ?>
+    <article>
+        <p>Posts are finished</p>
+    </article>
+<?php else : foreach ($this->posts as $post) : ?>
+    <article>
+        <header>
+            <h2><a href="<?php echo $this->url(array('controller' => 'index',
+                                                     'action' => 'post',
+                                                     'id' => $post->po_id))
+                         ?>"><?php echo $this->escape($post->po_title) ?>
+                </a>
+            </h2>
+        </header>
+        <?php echo $this->preview($post->po_blog_post) ?>
+        <p class="date"><?php echo $this->escape($post->po_created_at) ?></p>
+        <a href="/index/edit-post/id/<?php echo $post->po_id ?>">Edit</a>
+        <a href="" onclick = "return confirm('Are you sure want to delete post <?= $post->po_id ?> ?') && <?php // $this->deletePost($post->po_id) ?>">Delete</a>  -->
+    </article>
+<?php endforeach; endif ?>
+    </section> <!-- posts -->
+</section> <!-- content -->

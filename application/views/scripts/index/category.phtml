@@ -1,0 +1,23 @@
+<section id="content">
+    <section id="posts">
+        <?php if (count($this->posts) < 1) : ?>
+            <article>
+                <p>Posts are Finished</p>
+            </article>
+        <?php else : foreach ($this->posts as $post) : ?>
+            <article>
+                <header>
+                    <h2><a href="<?php
+                            echo $this->url(array('controller' => 'index',
+                                                  'action' => 'post',
+                                                  'id' => $post['po_id']))
+                            ?>"><?php echo $this->escape($post['po_title']) ?>
+                        </a>
+                    </h2>
+                </header>
+                <?php echo $this->preview($post['po_blog_post']) ?>
+                <p><?php echo $this->escape($post['po_created_at']) ?></p>
+            </article>
+        <?php endforeach; endif ?>
+    </section> <!-- posts -->
+</section> <!-- content -->
