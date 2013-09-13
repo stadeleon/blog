@@ -9,7 +9,7 @@
             </header>
             <a href="/index/edit-post/id/<?php echo $this->post['po_id'] ?>">Edit</a>
 
-            <?php echo $this->removeCutTag($this->post['po_blog_post']) ?>
+            <?php echo $this->cutTag ?>
             <p class="date"><?php echo $this->post['po_created_at'] ?></p>
         </article>
     </section> <!-- posts -->

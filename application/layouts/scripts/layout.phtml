@@ -3,7 +3,12 @@
 <head>
     <meta charset=utf-8>
     <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/css/style.css" media="screen" />
-    <?php echo $this->headTitle() ?>
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <?php echo $this->headTitle(); ?>
+    <?php echo $this->headScript(); ?>
+    <?php echo $this->headLink(); ?>
+
 </head>
 <body>
 <div id="wrapper">

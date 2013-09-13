@@ -67,14 +67,18 @@ class Application_Model_Posts extends Zend_Db_Table_Abstract
 
     public function insertNewPost($category_id, $url, $title, $blog_post)
     {
-        $data = array(
+
+        $row = $this->createRow(array(
             'po_id'          => 'NULL',
             'po_category_id' => $category_id,
             'po_url'         => $url,
             'po_title'       => $title,
             'po_blog_post'   => $blog_post,
             'po_created_at'  => date("y.m.d H:m:s")
-        );
+        ));
+
+        return $row->save();
+
         $query = $this->insert($data);
         if (!$query) {
             throw new Exception('Error! insertNewPost Failed :(');
@@ -93,6 +97,8 @@ class Application_Model_Posts extends Zend_Db_Table_Abstract
 
     public function updatePostById($id, $cat_id, $url, $title, $blog_post, $date)
     {
+        $result = null;
+        $row = $this->fetchRow("po_id = {$this->getDefaultAdapter()->quote($id)}");
         $data = array(
             'po_category_id' => $cat_id,
             'po_url'         => $url,
@@ -100,18 +106,16 @@ class Application_Model_Posts extends Zend_Db_Table_Abstract
             'po_blog_post'   => $blog_post,
             'po_created_at'  => $date
         );
-
-        $query = $this->update($data, "po_id = {$id}" );
-        if (!$query) {
-            throw new Exception('Error! updatePost Failed :(');
+        if ($row) {
+            $result = $row->save($data);
         }
-        return $id;
+
+        return $result;
     }
 
-    public function deletePost($id)
+    public function deletePostById($id)
     {
-        $query = $this->delete('id=' . ((int)$id));
-        echo 'Tratata!';
+        $query = $this->delete('po_id=' . ((int)$id));
         if (!$query) {
             throw new Exception('Error! deletePost Failed :(');
         }
