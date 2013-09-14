@@ -135,7 +135,18 @@ class IndexController extends Zend_Controller_Action
         print Zend_Json::encode(array('result' => true,
                                       'id' => 1
                                 ));
+    }
 
+    /**
+     * View category
+     *
+     * @return void
+     */
+    public function addComentAction()
+    {
+        $id = intval($this->_getParam('id'));
+        $addComentForm = new Application_Form_AddComents();
+        $this->view->form = $addComentForm;
     }
 
     /**
