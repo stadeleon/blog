@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthenticationController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AuthenticationController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/AuthenticationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="4" selection-start="1956" selection-end="1956" vertical-scroll-proportion="1.5429616" vertical-offset="329" max-vertical-offset="1564">
+            <state line="75" column="47" selection-start="2251" selection-end="2251" vertical-scroll-proportion="-15.038462" vertical-offset="884" max-vertical-offset="1564">
               <folding />
             </state>
           </provider>
@@ -71,7 +71,16 @@
       <file leaf-file-name="IndexController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="11" selection-start="935" selection-end="1057" vertical-scroll-proportion="-9.807693" vertical-offset="272" max-vertical-offset="3213">
+            <state line="31" column="9" selection-start="1052" selection-end="1052" vertical-scroll-proportion="50.346153" vertical-offset="1836" max-vertical-offset="3213">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddComents.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/forms/AddComents.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="8" selection-start="1131" selection-end="1133" vertical-scroll-proportion="0.70566726" vertical-offset="192" max-vertical-offset="901">
               <folding />
             </state>
           </provider>
@@ -98,11 +107,11 @@
         <option value="$PROJECT_DIR$/application/views/scripts/index/add-coment.phtml" />
         <option value="$PROJECT_DIR$/application/Bootstrap.php" />
         <option value="$PROJECT_DIR$/application/forms/AddComents.php" />
-        <option value="$PROJECT_DIR$/application/controllers/IndexController.php" />
         <option value="$PROJECT_DIR$/application/layouts/scripts/layout.phtml" />
         <option value="$PROJECT_DIR$/application/views/scripts/authentication/login.phtml" />
         <option value="$PROJECT_DIR$/application/controllers/AuthenticationController.php" />
         <option value="$PROJECT_DIR$/application/forms/LoginForm.php" />
+        <option value="$PROJECT_DIR$/application/controllers/IndexController.php" />
       </list>
     </option>
   </component>
@@ -553,13 +562,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/forms/AddComents.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="8" selection-start="1296" selection-end="1296" vertical-scroll-proportion="0.42288557" vertical-offset="476" max-vertical-offset="901">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/index/action.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="11" selection-start="94" selection-end="96" vertical-scroll-proportion="0.23831776" vertical-offset="0" max-vertical-offset="428">
@@ -609,13 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="11" selection-start="935" selection-end="1057" vertical-scroll-proportion="-9.807693" vertical-offset="272" max-vertical-offset="3213">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/scripts/authentication/login.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="27" selection-start="157" selection-end="157" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="187">
@@ -632,7 +627,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/AuthenticationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="4" selection-start="1956" selection-end="1956" vertical-scroll-proportion="1.5429616" vertical-offset="329" max-vertical-offset="1564">
+        <state line="75" column="47" selection-start="2251" selection-end="2251" vertical-scroll-proportion="-15.038462" vertical-offset="884" max-vertical-offset="1564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="9" selection-start="1052" selection-end="1052" vertical-scroll-proportion="50.346153" vertical-offset="1836" max-vertical-offset="3213">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/forms/AddComents.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="8" selection-start="1131" selection-end="1133" vertical-scroll-proportion="0.70566726" vertical-offset="192" max-vertical-offset="901">
           <folding />
         </state>
       </provider>

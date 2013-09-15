@@ -27,9 +27,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-/*        if (Zend_Auth::getInstance()->hasIdentity()){
+        if (Zend_Auth::getInstance()->hasIdentity()){
             $this->redirect('/authentication/login');
-        }*/
+        }
 
         $this->view->del = $this->_getParam('del');
         // Создаем экземпляр модели постов
