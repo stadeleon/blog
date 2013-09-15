@@ -5,6 +5,7 @@ class IndexController extends Zend_Controller_Action
 
     public function init()
     {
+
         /* Initialize action controller here */
         // Уставливаем название блога
         $this->view->title = 'Тестовый блог на Zend Framework';
@@ -26,6 +27,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+/*        if (Zend_Auth::getInstance()->hasIdentity()){
+            $this->redirect('/authentication/login');
+        }*/
 
         $this->view->del = $this->_getParam('del');
         // Создаем экземпляр модели постов
