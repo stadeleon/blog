@@ -15,50 +15,72 @@ class AuthenticationController extends Zend_Controller_Action
 
     public function loginAction()
     {
-        $this->_helper->layout->disableLayout(); //todo temporary line - set wright layout
-
+        $this->_helper->layout->setLayout('loginLayout');
         //check if user already logged in
-        if (Zend_Auth::getInstance()->hasIdentity()){
-            $this->redirect('/index/index');
-        }
+     //   if (Zend_Auth::getInstance()->hasIdentity()){
+     //       $this->redirect('/');
+     //   }
 
-        //form adding
+        //form adding into view
         //$form = Application_Form_LoginForm();
         //$this->view->form = $form;
 
-        $requestType = $this->getRequest();
-        $form = new Application_Form_LoginForm();
-
-        if ($requestType->isPost()){
-            if ($form->isValid($this->_request->getPost())){
-                $authAdapter = $this->getAuthAdapter();
-              /*  $username = 'leo';
-                $password = 'passworsd1';*/
-
-                $username = $form->getValue('username');
-                $password = $form->getValue('password');
-
-                $authAdapter->setIdentity($username)
-                    ->setCredential($password);
-
-                $authMethod = Zend_Auth::getInstance();
-                $result = $authMethod->authenticate($authAdapter);
-
-                if ($result->isValid()){
-                    $identity = $authAdapter->getResultRowObject();
-                    $authStorage = $authMethod->getStorage();
-                    $authStorage->write($identity);
-
-                    // $this->redirect('index/index');
-                } else {
-                    $this->view->errorMessage = 'Username or password is Wrong';
-                }
-            }
-        }
-        $this->view->form = $form;
-
+        // login script including to view login
+        $this->view->headScript()->appendFile('/js/authentication/login.js', 'text/javascript');
 
     }
+
+    public function authAction()
+    {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $result = array();
+
+        /*  $username = 'leo';
+          $password = 'password1';*/
+
+        /*$username = $form->getValue('username');
+        $password = $form->getValue('password');*/
+
+        $username = $this->_getParam('username');
+        $password = $this->_getParam('password');
+
+
+        if (($username != null) && ($username != '') && ($password != null) && ($password != '')){
+
+
+            $authAdapter = $this->getAuthAdapter();
+            $authAdapter->setIdentity($username)
+                        ->setCredential($password);
+
+            $authObject = Zend_Auth::getInstance();
+            $resultAuth = $authObject->authenticate($authAdapter);
+
+            if ($resultAuth->isValid()){
+                $identity = $authAdapter->getResultRowObject();
+                $authStorage = $authObject->getStorage();
+                $authStorage->write($identity);
+                $result = array(
+                    'result' => true,
+                    'message' => 'Access Granted'
+                );
+            } else {
+                //$this->view->errorMessage = 'Username or password is Wrong';
+                $result = array('result' => false,
+                    'message' => 'Username or password is Wrong'
+                );
+            }
+        } else {
+            $result = array(
+                'result' => false,
+                'message' => '0'
+            );
+        }
+
+        print Zend_Json::encode($result);
+    }
+
 
     public function logoutAction()
     {

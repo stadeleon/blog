@@ -65,26 +65,26 @@ class Application_Model_Posts extends Zend_Db_Table_Abstract
      * @return bool
      */
 
-    public function insertNewPost($category_id, $url, $title, $blog_post)
+    public function insertNewPost($category_id, $url, $title, $blog_post, $date)
     {
-
         $row = $this->createRow(array(
-            'po_id'          => 'NULL',
             'po_category_id' => $category_id,
             'po_url'         => $url,
             'po_title'       => $title,
             'po_blog_post'   => $blog_post,
-            'po_created_at'  => date("y.m.d H:m:s")
+            'po_created_at'  => $date
         ));
+        $row->save();
+        $id = $row->po_id;
+        return $id;
+        //return $result;
 
-        return $row->save();
-
-        $query = $this->insert($data);
+     /*   $query = $this->insert($data);
         if (!$query) {
             throw new Exception('Error! insertNewPost Failed :(');
         }
         $id = $this->_db->lastInsertId();
-        return $id;
+        return $id;*/
     }
 
 

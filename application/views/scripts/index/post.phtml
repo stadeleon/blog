@@ -1,9 +1,7 @@
 <section id="content">
     <section id="posts">
         <article>
-            <?php if (($this->new) == 1){
-                echo 'New Post Successfully Added';
-            }?>
+            <?= $this->newMessage; ?>
             <header>
                 <h2><?php echo $this->post['po_title'] ?></h2>
             </header>

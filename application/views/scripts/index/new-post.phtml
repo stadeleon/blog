@@ -13,9 +13,9 @@
                 <h2><?php echo 'Create New Post' ?></h2>
             </header>
 
-            <form action="/index/insert-post" method="post">
+            <form id="insert-post" action="/index/insert-post" method="post">
                 <label for="cat_id">Select Category</label>
-                <select name="cat_id">
+                <select id="cat_id" name="cat_id">
                     <?php foreach ($this->categoryList as $category) : ?>
                     <option value="<?php echo $category['cat_id'] ?>">
                         <?php echo $category['cat_title'] ?>
@@ -24,11 +24,11 @@
                 </select>
                 <br/>
                 <label for="title">Enter Posts Title</label>
-                <input type="text" name="title" style ="width:100%;" value="New Post">
+                <input type="text" id="title" name="title" style ="width:100%;" value="New Post">
                 <label for="url">Enter posts URL here</label>
-                <input type="text" name="url" style ="width:100%;" value="this post url">
+                <input type="text" id="url" name="url" style ="width:100%;" value="this post url">
                 <label for="blog_post">Your Content Below</label><br/>
-                <textarea name="blog_post" style ="width:100%; min-height:250px">Enter some content here</textarea>
+                <textarea id="blog_post" name="blog_post" style ="width:100%; min-height:250px">Enter some content here</textarea>
                 <input type="submit" name="submit" value="Add">
             </form>
         </article>

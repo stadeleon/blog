@@ -23,18 +23,19 @@ class Application_Form_AddComents extends Zend_Form
               ->addValidator('EmailAdress');
 
         $comment = new Zend_Form_Element_Textarea('coment');
-        $comment->setLabel('Coment')
+        $comment->setLabel('Comment')
                 ->addFilter('StripTags')
                 ->addValidator('NotEmpty');
+
         $date = new Zend_Form_Element_Hidden('date');
         $actDate = new Zend_Date();
-        $date->setValue($actDate -> toString('YYYY-MM-dd HH:mm:ss'));
+        $date->setValue($actDate->toString('YYYY-MM-dd HH:mm:ss'));
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Save');
 /*        $submit = new Zend_Form_Element_Button('submit');
         $submit->setLabel('Save')
-               ->setAttribs( array("onclick"=>"return gsubmit()"));*/
+               ->setAttribs( array("onsubmit"=>"return gsubmit()"));*/
 
         $this->setName('addComent');
         $this->setAttrib('action', '/index/save-coment');

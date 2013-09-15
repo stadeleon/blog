@@ -27,7 +27,7 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        if (Zend_Auth::getInstance()->hasIdentity()){
+       if (!Zend_Auth::getInstance()->hasIdentity()){
             $this->redirect('/authentication/login');
         }
 
@@ -44,6 +44,8 @@ class IndexController extends Zend_Controller_Action
 
     	//$blogModel = new Application_Model_News();
     	//$this->view->newsList = $blogModel->getList();   // action body
+
+        // action script including
         $this->view->headScript()->appendFile('/js/index/action.js', 'text/javascript');
     }
 
@@ -56,7 +58,11 @@ class IndexController extends Zend_Controller_Action
     {
         // Берем ID'шник из параметра
         $id = intval($this->_getParam('id', 0));
-        $this->view->new = $this->_getParam('new');
+        //$this->view->new = $this->_getParam('new');
+
+        if (($this->_getParam('new')) == 1){
+            $this->view->newMessage = 'New Post Successfully Added';
+        }
 
         if ($id > 0) {
             // Создаем экземпляр модели постов и выбираем посты по ID
@@ -82,6 +88,7 @@ class IndexController extends Zend_Controller_Action
         $category = new Application_Model_Categories();
         $this->view->categoryList = $category->getCategories();
         //выводим форму добавления поста
+        $this->view->headScript()->appendFile('/js/index/insert-post.js', 'text/javascript');
     }
 
     public function insertPostAction()
@@ -94,8 +101,28 @@ class IndexController extends Zend_Controller_Action
         $title = $this->_getParam('title');
         $blog_post = $this->_getParam('blog_post');
 
-        $postModel = new Application_Model_Posts();
-        $this->view->post = $postModel->insertNewPost($cat_id, $url, $title, $blog_post);
+        $actDate = new Zend_Date();
+        $date = $actDate->toString('YYYY-MM-dd HH:m:s');
+
+        if (($cat_id != null) && ($cat_id != '')
+            && ($title != null) && ($title != '')
+            && ($blog_post != null) && ($blog_post != '')
+        ){
+            $postModel = new Application_Model_Posts();
+            $insertId = $postModel->insertNewPost($cat_id, $url, $title, $blog_post, $date);
+            $result = array(
+                'result' => true,
+                'message' => 'OK',
+                'insertId' => $insertId
+            );
+        }else{
+            $result = array(
+                'result' => false,
+                'message' => 'Post didn`t Added'
+            );
+        }
+
+        print Zend_Json::encode($result);
     }
 
     public function editPostAction()
@@ -129,13 +156,11 @@ class IndexController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-//        // deletes a particular post from database and redirects too allposts action.
+        // deletes a particular post from database and redirects too all posts action.
         $id = $this->_getParam('id',0);
         $postModel = new Application_Model_Posts();
         $postModel->deletePostById($id);
-//        // $this->_redirect('/index/');
-//        $this->redirect("/index/index/del/{$id}");
-//        //setResponse($response);
+
         print Zend_Json::encode(array('result' => true,
                                       'id' => 1
                                 ));
