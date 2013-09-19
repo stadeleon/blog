@@ -97,8 +97,9 @@ class Application_Model_Posts extends Zend_Db_Table_Abstract
 
     public function updatePostById($id, $cat_id, $url, $title, $blog_post, $date)
     {
-        $result = null;
-        $row = $this->fetchRow("po_id = {$this->getDefaultAdapter()->quote($id)}");
+        $rez_id = null;
+        $row = $this->fetchRow("po_id = {$this->getDefaultAdapter()->quote($id)}"); // такое выражение НЕ РАБОТАЕТ так как функция сама подставляет кавычки
+        //$row = $this->fetchRow("po_id = {$id}");
         $data = array(
             'po_category_id' => $cat_id,
             'po_url'         => $url,
@@ -106,11 +107,13 @@ class Application_Model_Posts extends Zend_Db_Table_Abstract
             'po_blog_post'   => $blog_post,
             'po_created_at'  => $date
         );
+
         if ($row) {
-            $result = $row->save($data);
+            $row->setFromArray($data);
+            $rez_id = $row->save(); // save() returns 'id'
         }
 
-        return $result;
+        return $rez_id;
     }
 
     public function deletePostById($id)

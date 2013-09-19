@@ -13,7 +13,7 @@ $(function() {
             function(data) {
                 if (data.result) {
                     alert('Post ' + data.insertId + ' ' + data.message);
-                    location.href = '/index/post/id/'+data.insertId+'new/1';
+                    location.href = '/index/post/id/' + data.insertId + '/new/1';
                 }else{
                     alert(data.message);
                 }

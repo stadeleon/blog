@@ -88,6 +88,7 @@ class IndexController extends Zend_Controller_Action
         $category = new Application_Model_Categories();
         $this->view->categoryList = $category->getCategories();
         //выводим форму добавления поста
+        //подключаем скрипт
         $this->view->headScript()->appendFile('/js/index/insert-post.js', 'text/javascript');
     }
 
@@ -100,7 +101,7 @@ class IndexController extends Zend_Controller_Action
         $url = $this->_getParam('url');
         $title = $this->_getParam('title');
         $blog_post = $this->_getParam('blog_post');
-
+        // $this->hasParam('blog_post');
         $actDate = new Zend_Date();
         $date = $actDate->toString('YYYY-MM-dd HH:m:s');
 
@@ -130,25 +131,96 @@ class IndexController extends Zend_Controller_Action
         $id = $this->_getParam('id');
         $this->view->success = $this->_getParam('success');
 
+        if (($this->_getParam('success')) == 1){
+            $this->view->editOkMessage = 'Post Successfully Updated';
+        }
+
         $post = new Application_Model_Posts();
         $this->view->post = $post->getPostById($id);
 
         //получаем список категорий
         $category = new Application_Model_Categories();
         $this->view->categoryList = $category->getCategories();
+
+        $this->view->headScript()->appendFile('/js/index/update-post.js', 'text/javascript');
     }
 
     public function updatePostAction()
     {
+        $result['error'] = false;
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
         $id = $this->_getParam('id');
         $cat_id = $this->_getParam('cat_id');
         $url = $this->_getParam('url');
-        $title = $this->_getParam('title');
+        $post_title = $this->_getParam('post_title');
         $blog_post = $this->_getParam('blog_post');
         $date = $this->_getParam('date');
 
-        $post = new Application_Model_Posts();
-        $this->view->post = $post->updatePostById($id, $cat_id, $url, $title, $blog_post, $date);
+//        ($this->hasParam("id"))
+//            ? ($id = $this->_getParam('id'))
+//            : (($result += array('error' => true, 'no_id' => true))
+//            && ($id = ''));
+//        ($this->hasParam("cat_id")) ? ($cat_id = $this->_getParam('cat_id'))
+//            : (($result += array('error' => true, 'no_cat_id' => true)) && ($cat_id = ''));
+//        ($this->hasParam("url")) ? ($url = $this->_getParam('url'))
+//            : (($result += array('error' => true, 'no_url' => true)) && ($url = ''));
+//        ($this->hasParam("post_title")) ? ($post_title = $this->_getParam('post_title'))
+//            : (($result += array('error' => true, 'no_post_title' => true)) && ($post_title = ''));
+//        ($this->hasParam("blog_post")) ? ($blog_post = $this->_getParam('blog_post'))
+//            : (($result += array('error' => true, 'no_blog_post' => true)) && ($blog_post = ''));
+//        ($this->hasParam("date")) ? ($date = $this->_getParam('date'))
+//            : (($result += array('error' => true, 'no_date' => true)) && ($date = ''));
+
+
+        if (empty($id)) {
+            $result['error'] = true;
+            $result['no_id'] = 'id';
+            $id = 0;
+        } else if (!is_numeric($id)){
+            $id = 0;
+            $result['error'] = true;
+            $result['no_int_id'] = 'id';
+        }
+
+        if (empty($cat_id)) {
+            $result['error'] = true;
+            $result['no_cat_id'] = 'cat_id';
+            $cat_id = 0;
+        } else if (!is_numeric($cat_id)){
+            $cat_id = 0;
+            $result['error'] = true;
+            $result['no_int_cat_id'] = 'cat_id';
+        }
+
+        if ($result['error']) {
+            $result['hack'] = 'hack';
+        }
+
+        if (empty($post_title)) {
+            $result['error'] = true;
+            $result['no_post_title'] = 'post_title';
+        }
+
+        if (empty($date)) {
+            $result['error'] = true;
+            $result['no_date'] = 'date';
+        }
+
+        if (!$result['error']) {
+            $postsModel = new Application_Model_Posts();
+            $queryStatus = $postsModel->updatePostById($id, $cat_id, $url, $post_title, $blog_post, $date);
+            $result['result'] = true;
+            $result['message'] = 'OK';
+            $result['id'] = $id;
+            $result['status'] = $queryStatus;
+        } else {
+            $result['result'] = false;
+            $result['message'] = 'Wrong Parameters';
+        }
+
+        print Zend_Json::encode($result);
     }
 
     public function deletePostAction()

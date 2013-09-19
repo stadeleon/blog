@@ -23,7 +23,7 @@
         <a href="/index/edit-post/id/<?php echo $post->po_id ?>">Edit</a>
 
 <!--        <a href="--><?php // echo $this->url(array('controller'=>'index','action'=>'delete-post','id'=>$post->po_id)) ?><!--" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>-->
-        <a onclick="confirm('Are you sure you want to delete post № <?= $post->po_id ?>'); return deletePost(<?php echo $post->po_id ?>);  " >Delete</a>
+        <a onclick="deletePost(<?php echo $post->po_id ?>);  " >Delete</a>
 
     </article>
 <?php endforeach; endif ?>

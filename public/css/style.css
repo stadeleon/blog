@@ -102,3 +102,8 @@ footer {
     text-align: center;
     background: #fff
 }
+
+div.error{
+    color: #f00;
+    display: none;
+}

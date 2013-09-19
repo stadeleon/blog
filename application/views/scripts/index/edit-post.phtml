@@ -10,38 +10,54 @@
     <section id="posts">
         <article>
             <header>
-                <h2><?php echo 'Post Editing' ?></h2>
+                <h2><?= 'Post Editing' ?></h2>
             </header>
-            <?php if (($this->success) == 1){
-                echo 'Post Changes Successfully Saved';
-            }?>
-            <form action="/index/update-post" method="post">
+            <?= $this->editOkMessage ?>
+
+            <form id="update-post" action="/index/update-post" method="post">
+
+                <div class="error" id="hack">ERROR! Hacking attempt!</div>
+                <div class="error" id="no_id">ERROR! There is no id specified</div>
+                <div class="error" id="no_int_id">ERROR! post_id must be numeric</div>
+
+                <input type="hidden" id="id" name="id" value="<?= $this->post['po_id']; ?>">
+
+                <div class="error" id="no_cat_id">ERROR! There is no category specified</div>
+                <div class="error" id="no_int_cat_id">ERROR! category must be numeric</div>
+
                 <label for="cat_id">Select Category</label>
-                <select name="cat_id">
+                <select id="cat_id" name="cat_id">
                     <?php foreach ($this->categoryList as $category) : ?>
-                        <option value="<?php echo $category['cat_id'] ?>"
-                                       <?=($category['cat_id'] == $this->post['po_category_id']) ? 'selected' : '' ?> >
-                            <?php echo $category['cat_title'] ?>
+                        <option value="<?= $category['cat_id']; ?>"
+                            <?= ($category['cat_id'] == $this->post['po_category_id']) ? 'selected' : ''; ?> >
+                            <?= $category['cat_title']; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
                 <br/>
-                <label for="title">Posts Title</label>
-                <input type="text" name="title" style ="width:100%;x" value="<?php echo $this->post['po_title'] ?>">
+
+                <label for="post_title">Posts Title</label>
+                <div class="error" id="no_post_title"></div>
+
+                <input type="text" id="post_title" name="post_title" style="width:100%;"
+                       value="<?= $this->post['po_title']; ?>"/>
 
                 <label for="url">Enter posts URL here</label>
-                <input type="text" name="url" style ="width:100%;" value="<?php echo $this->post['po_url'] ?>">
+                <input type="text" id="url" name="url" style="width:100%;" value="<?= $this->post['po_url']; ?>">
 
                 <label for="blog_post">Your Content Below</label><br/>
-                <textarea name="blog_post" style ="width:100%; min-height:250px"><?php echo $this->post['po_blog_post'] ?></textarea>
+                <textarea name="blog_post" id="blog_post"
+                          style="width:100%; min-height:250px"><?= $this->post['po_blog_post']; ?></textarea>
 
                 <label for="date">Select Date</label>
-                <input type="datetime" class="date" name="date" value="<?php echo $this->post['po_created_at'] ?>" >
 
-                <input type="hidden" name="id" value="<?php echo $this->post['po_id'] ?>">
+                <div class="error" id="no_date">Date is Required! There is no date specified</div>
+
+                <input type="datetime" id="date" class="date" name="date" value="<?= $this->post['po_created_at']; ?>">
                 <br/>
                 <input type="submit" name="submit" value="Save">
             </form>
         </article>
-    </section> <!-- posts -->
+    </section>
+    <!-- posts -->
 </section> <!-- content -->
