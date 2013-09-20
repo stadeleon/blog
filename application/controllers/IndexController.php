@@ -276,5 +276,6 @@ class IndexController extends Zend_Controller_Action
     	$blogModel = new Application_Model_News();
     	$this->view->newsContent = $blogModel->getRow($id);
     }
+
 }
 
