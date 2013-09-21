@@ -1,19 +1,19 @@
 /**
  * Created by Mrakobes on 15.09.13.
  */
+
 $(function() {
     $("#update-post").submit(function(){
         $.getJSON('/index/update-post',
             {
                 id: $('#id').val(),
-                cat_id: $('#cat_id').val(),
-                post_title: $('#post_title').val(),
                 url: $('#url').val(),
                 date: $('#date').val(),
-                blog_post: $('#blog_post').val()
+                cat_id: $('#cat_id').val(),
+                blog_post: $('#blog_post').val(),
+                post_title: $('#post_title').val()
             },
             function(data) {
-//                alert (data.result);
                 hackDiv = $('<div />',
                     {'class' : "error",
                         id     : "hack",
@@ -64,11 +64,10 @@ $(function() {
                         text   : "Date is Required! There is no date specified"
                     });
                 if (data.result) {
-                    //alert('Post ' + data.status + data.message);
                 }else{
                     for(var key in data){
                         if ((key != 'result') && (key != 'error') && (key != 'message')){
-                            eval(key+'Div'+".insertBefore('#' + data[key])");
+                            eval(key + 'Div' + ".insertBefore('#' + data[key])");
 /*
                             // eval(key+'Div'+".insertAfter('#post_title')"); // на память
                             // no_post_titleDiv.insertAfter('#post_title');  //работает

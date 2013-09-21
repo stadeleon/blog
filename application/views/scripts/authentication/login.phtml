@@ -1,13 +1,17 @@
 <br /><br />
 <div id="view-content">
 	<p>View script for controller <b>Authentication</b> and script/action name <b>login</b></p>
-    <?= $this->errorMessage; ?>
+
     <form id="login-form" action="/authentication/auth" method="post">
         <ul>
+
+            <li><div class="error" id="wrong_password"></div></li>
+
             <li><label for="username">User Name</label>
                 <input type="text" name="username" id="username"></li>
             <li><label for="password">Password</label>
                 <input type="password" name="password" id="password"></li>
+
             <input type="submit" name="submit" value="Login">
         </ul>
     </form>

@@ -35,20 +35,30 @@ class AuthenticationController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $result = array();
-
         /*  $username = 'leo';
           $password = 'password1';*/
 
         /*$username = $form->getValue('username');
         $password = $form->getValue('password');*/
 
+        $result['error'] = false;
+
         $username = $this->_getParam('username');
         $password = $this->_getParam('password');
 
+      //  echo ('AUTH! ' . $username . ' ' . $password);
 
-        if (($username != null) && ($username != '') && ($password != null) && ($password != '')){
+        if (empty($username)) {
+            $result['error'] = true;
+            $result['no_username'] = 'username';
+        }
 
+        if (empty($password)) {
+            $result['error'] = true;
+            $result['no_password'] = 'password';
+        }
+
+        if (!$result['error']){
 
             $authAdapter = $this->getAuthAdapter();
             $authAdapter->setIdentity($username)
@@ -61,21 +71,16 @@ class AuthenticationController extends Zend_Controller_Action
                 $identity = $authAdapter->getResultRowObject();
                 $authStorage = $authObject->getStorage();
                 $authStorage->write($identity);
-                $result = array(
-                    'result' => true,
-                    'message' => 'Access Granted'
-                );
+
+                $result['result'] = true;
+                $result['message'] = 'Access Granted';
             } else {
-                //$this->view->errorMessage = 'Username or password is Wrong';
-                $result = array('result' => false,
-                    'message' => 'Username or password is Wrong'
-                );
+                $result ['result'] = false;
+                $result['error'] = true;
+                $result['wrong_password'] = 'wrong_password';
             }
         } else {
-            $result = array(
-                'result' => false,
-                'message' => '0'
-            );
+            $result['result'] = false;
         }
 
         print Zend_Json::encode($result);
