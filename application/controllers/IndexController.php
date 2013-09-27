@@ -27,9 +27,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-       if (!Zend_Auth::getInstance()->hasIdentity()){
-            $this->redirect('/authentication/login');
-        }
+//       if (!Zend_Auth::getInstance()->hasIdentity()){
+//            $this->redirect('/authentication/login');
+//        }
 
         $this->view->del = $this->_getParam('del');
         // Создаем экземпляр модели постов
@@ -243,11 +243,11 @@ class IndexController extends Zend_Controller_Action
      *
      * @return void
      */
-    public function addComentAction()
+    public function addCommentAction()
     {
         $id = intval($this->_getParam('id'));
-        $addComentForm = new Application_Form_AddComents();
-        $this->view->form = $addComentForm;
+        $addCommentForm = new Application_Form_AddComments();
+        $this->view->form = $addCommentForm;
     }
 
     /**

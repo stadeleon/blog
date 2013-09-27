@@ -17,9 +17,10 @@ class AuthenticationController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout('loginLayout');
         //check if user already logged in
-     //   if (Zend_Auth::getInstance()->hasIdentity()){
-     //       $this->redirect('/');
-     //   }
+        if (Zend_Auth::getInstance()->hasIdentity()){
+            //$this->redirect('/');
+            echo 'has identity';
+        }
 
         //form adding into view
         //$form = Application_Form_LoginForm();
